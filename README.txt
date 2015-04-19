@@ -16,7 +16,7 @@ Helicopter "realistic" control
 
 Lighting control
     9: Toggle helicopter spotlight
-    0: Toggle sunlight
+    0: Toggle main light
 
 Camera control (hold SHIFT)
     W: Camera look up

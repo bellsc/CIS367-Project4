@@ -170,8 +170,6 @@ Helicopter = function(mainBlades, tailBlades) {
     spotlight.add(spotlightBulb);
     helicopter_group.add(spotlight);
 
-    //Bounding sphere
-   // helicopter_group.add(boundSphere);
 
     return {
         model : helicopter_group,
