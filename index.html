@@ -10,5 +10,57 @@
 <body style='margin: 0px; background-color: #bbbbbb; overflow: hidden;'>
 
 <script src="main.js"></script>
-Controls <a href="README.txt">found here.</a>
+Controls <a href="README.txt" target="_blank">found here.</a>
+<div id="container" style="text-align: center">
+    <div id="game">
+
+    </div>
+
+    <div id="gameHUD">
+            Touch the ball to earn points.  Get 100 points to win! <br>
+    <p id="scoreLine">Score: <span id="gameScore">0</span></p>
+
+    </div>
+</div>
+
+<script id="vs0" type="x-shader/x-vertex">
+    varying vec3 my_pos;
+    void main(){
+        my_pos = position;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+
+</script>
+
+<script id="fs0" type="x-shader/x-fragment">
+    varying vec3 my_pos;
+    uniform vec4 color1, color2, color3;
+
+    void main(){
+
+        vec3 vector = vec3(my_pos.x, 0.0,  my_pos.z);
+        vec3 axisVector = vec3(my_pos.x, 0.0, 0.0);
+        float dotOfVecs = dot(vector, axisVector);
+        float magVec = length(vector);
+        float magAxisVec = length(axisVector);
+
+        float angle = acos( dotOfVecs / (magVec * magAxisVec ));
+
+        float colorChoose = mod(floor(angle * 3.0), 3.0);
+
+        if( colorChoose == 0.0){
+            gl_FragColor = color1;
+           // gl_FragColor = vec4 (0.0, 0.0, 0.0, 1.0);
+        }
+        else if(colorChoose == 1.0){
+            gl_FragColor = color2;
+            // gl_FragColor = vec4 (1.0, 1.0, 1.0, 1.0);
+        }
+        else
+            gl_FragColor = color3;
+           // gl_FragColor = vec4 (0.0, 0.0, 1.0, 1.0);
+
+    }
+</script>
+
 </body>

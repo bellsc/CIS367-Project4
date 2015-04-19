@@ -58,6 +58,11 @@ Helicopter = function(mainBlades, tailBlades) {
     spotlight_cf.multiply(new THREE.Matrix4().makeTranslation(3.1, -1.2,0));
     spotlight_cf.multiply(new THREE.Matrix4().makeRotationZ(THREE.Math.degToRad(35)));
 
+    var boundingRad = 3;
+    var boundGeo = new THREE.SphereGeometry(boundingRad, 20, 20);
+    var boundMat = new THREE.MeshPhongMaterial({color: heliColor, map:heli_tex});
+    var boundSphere = new THREE.Mesh(boundGeo, boundMat);
+
     var tran = new THREE.Vector3();
     var quat = new THREE.Quaternion();
     var vscale = new THREE.Vector3();
@@ -165,6 +170,9 @@ Helicopter = function(mainBlades, tailBlades) {
     spotlight.add(spotlightBulb);
     helicopter_group.add(spotlight);
 
+    //Bounding sphere
+   // helicopter_group.add(boundSphere);
+
     return {
         model : helicopter_group,
         mainProp_cf: mainProp_cf,
@@ -173,7 +181,8 @@ Helicopter = function(mainBlades, tailBlades) {
         mainProp: mainProp,
         tailProp: tailProp,
         spotlight: spotlight,
-        spotlightLight: frontLight
+        spotlightLight: frontLight,
+        boundingSphereRad: boundingRad
     };
 }
 
